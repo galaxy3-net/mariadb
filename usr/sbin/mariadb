@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+exec | tee -a /var/log/mariadb_startup.log
+exec 2>&1
+
+CONTAINER_NAME=mariadb
+CONTAINER_IMAGE=mariadb:latest
+
+function start () {
+#    mkdir -p /tmp/splunk/{etc,var}
+    docker pull ${CONTAINER_IMAGE}
+	sudo -E docker run -d --name ${CONTAINER_NAME} \
+		-p 3306:3306/tcp \
+		${CONTAINER_IMAGE}
+#    --mount type=bind,source=/tmp/splunk/etc,target=/opt/splunk/etc \
+#    --mount type=bind,source=/tmp/splunk/var,target=/opt/splunk/var \
+#    --mount type=bind,source=/var/log/,target=/var/log/nakadia/ \
+#    --mount type=bind,source=/Downloads,target=/Downloads \
+#    --mount type=bind,source=/repos,target=/repos \
+#	  -e "SPLUNK_START_ARGS=--accept-license" \
+#	  -e "SPLUNK_PASSWORD=cybersecurity" \
+#	  -e "SPLUNK_USERNAME=admin" \
+#		-p 8000:8000/tcp \
+
+}
+
+cd /repos/webgoat/Docker
+#make pull
+docker pull ${CONTAINER_IMAGE}
+
+#ifconfig eth1:2 10.55.55.6 netmask 255.255.255.0 up
+
+#systemctl stop docker
+#systemctl start docker
+/usr/local/bin/start_docker
+
+container-rm ${CONTAINER_NAME}
+start
+
+sleep 150
+
+#cat /repos/nakadia/Docker/etc/system/local/inputs.conf >> /tmp/splunk/etc/system/local/inputs.conf
+#cat /repos/nakadia/Docker/etc/system/default/indexes.conf >> /tmp/splunk/etc/system/default/indexes.conf
+
+
+#sudo docker exec -i --user splunk splunk /bin/bash -c "bin/splunk restart"
+
+#wait_on_startup
+#load_data
+container-alive-monitor ${CONTAINER_NAME}
+
+
+#  docker run -d -p 8000:8000 -e "SPLUNK_START_ARGS=--accept-license" -e "SPLUNK_PASSWORD=<password>" --name splunk splunk/splunk:latest

@@ -4,7 +4,7 @@ exec | tee -a /var/log/mariadb_startup.log
 exec 2>&1
 
 CONTAINER_NAME=mariadb
-CONTAINER_IMAGE=mariadb:latest
+CONTAINER_IMAGE=mariadb/server:latest
 
 function start () {
 #    mkdir -p /tmp/splunk/{etc,var}

@@ -24,7 +24,7 @@ function start () {
 
 }
 
-cd /repos/webgoat/Docker
+cd /repos/${CONTAINER_NAME}/Docker
 #make pull
 docker pull ${CONTAINER_IMAGE}
 

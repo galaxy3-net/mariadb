@@ -10,9 +10,9 @@ function start () {
 #    mkdir -p /tmp/splunk/{etc,var}
     docker pull ${CONTAINER_IMAGE}
 	sudo -E docker run -d --name ${CONTAINER_NAME} \
-	  -e MYSQL_ROOT_PASSWORD=mypass --log-bin --binlog-format=MIXED \
+	  -e MYSQL_ROOT_PASSWORD=mypass  \
 		-p 3306:3306/tcp \
-		${CONTAINER_IMAGE}
+		${CONTAINER_IMAGE} --log-bin --binlog-format=MIXED
 #    --mount type=bind,source=/tmp/splunk/etc,target=/opt/splunk/etc \
 #    --mount type=bind,source=/tmp/splunk/var,target=/opt/splunk/var \
 #    --mount type=bind,source=/var/log/,target=/var/log/nakadia/ \

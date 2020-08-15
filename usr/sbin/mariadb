@@ -10,6 +10,7 @@ function start () {
 #    mkdir -p /tmp/splunk/{etc,var}
     docker pull ${CONTAINER_IMAGE}
 	sudo -E docker run -d --name ${CONTAINER_NAME} \
+	  -e MYSQL_ROOT_PASSWORD=mypass --log-bin --binlog-format=MIXED \
 		-p 3306:3306/tcp \
 		${CONTAINER_IMAGE}
 #    --mount type=bind,source=/tmp/splunk/etc,target=/opt/splunk/etc \
@@ -21,7 +22,7 @@ function start () {
 #	  -e "SPLUNK_PASSWORD=cybersecurity" \
 #	  -e "SPLUNK_USERNAME=admin" \
 #		-p 8000:8000/tcp \
-
+docker run --name mariadbtest -e MYSQL_ROOT_PASSWORD=mypass -d mariadb/server:10.3 --log-bin --binlog-format=MIXED
 }
 
 cd /repos/${CONTAINER_NAME}/Docker

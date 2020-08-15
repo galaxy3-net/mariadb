@@ -22,7 +22,8 @@ function start () {
 #	  -e "SPLUNK_PASSWORD=cybersecurity" \
 #	  -e "SPLUNK_USERNAME=admin" \
 #		-p 8000:8000/tcp \
-docker run --name mariadbtest -e MYSQL_ROOT_PASSWORD=mypass -d mariadb/server:10.3 --log-bin --binlog-format=MIXED
+#docker run --name mariadbtest -e MYSQL_ROOT_PASSWORD=mypass -d mariadb/server:10.3 --log-bin --binlog-format=MIXED
+# https://mariadb.com/kb/en/installing-and-using-mariadb-via-docker/
 }
 
 cd /repos/${CONTAINER_NAME}/Docker

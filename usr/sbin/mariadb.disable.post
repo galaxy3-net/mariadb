@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
-docker stop webgoat
-docker rm webgoat
+docker stop mariadb
+docker rm mariadb
